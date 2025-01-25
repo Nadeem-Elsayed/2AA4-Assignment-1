@@ -5,13 +5,22 @@ public class Player{
     private Position position;
     private String player_path = "";
     public Player(Position position){
-
+        this.position = position;
+    }
+    public Position getPosition(){
+        return position;
     }
     public void setPlayerPath(String path){
         this.player_path = path;
     }
     public String getPlayerPath(){
         return new String(player_path);
+    }
+    public Direction getDirection(){
+        return direction;
+    }
+    public void setDirection(Direction direction){
+        this.direction = direction;
     }
     public void moveForward(){
         player_path = player_path + "F";
@@ -51,7 +60,7 @@ public class Player{
         player_path = player_path + "R";
         switch (direction) {
             case NORTH:
-                direction = Direction.EAST;
+                direction = Direction.WEST;
                 break;
             case WEST:
                 direction = Direction.NORTH;
@@ -60,7 +69,7 @@ public class Player{
                 direction = Direction.SOUTH;
                 break;
             case SOUTH:
-                direction = Direction.WEST;
+                direction = Direction.EAST;
                 break;
         }
     }
