@@ -6,4 +6,10 @@ public class Wall extends Space{
         super();
         super.representation = "#";
     }
+    public boolean isWall() {
+        return true;
+    }
+    public boolean isPath() {
+        return false;
+    }
 }

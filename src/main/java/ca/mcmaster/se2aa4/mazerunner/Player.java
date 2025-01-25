@@ -1,8 +1,67 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-public class Player extends Space{
-    public Player(String representation) {
-        super();
-        super.representation = "O";
+public class Player{
+    private Direction direction = Direction.WEST;
+    private Position position;
+    private String player_path = "";
+    public Player(Position position){
+
+    }
+    public void setPlayerPath(String path){
+        this.player_path = path;
+    }
+    public String getPlayerPath(){
+        return new String(player_path);
+    }
+    public void moveForward(){
+        player_path = player_path + "F";
+        switch (direction) {
+            case WEST:
+                position.setPosX(position.getPosX()+1);
+                break;
+            case EAST:
+                position.setPosX(position.getPosX()-1);
+                break;
+            case SOUTH:
+                position.setPosY(position.getPosY()+1);
+                break;
+            case NORTH:
+                position.setPosY(position.getPosY()-1);
+                break;
+        }
+    }
+    public void turnLeft(){
+        player_path = player_path + "L";
+        switch (direction) {
+            case NORTH:
+                direction = Direction.WEST;
+                break;
+            case WEST:
+                direction = Direction.SOUTH;
+                break;
+            case EAST:
+                direction = Direction.NORTH;
+                break;
+            case SOUTH:
+                direction = Direction.EAST;
+                break;
+        }
+    }
+    public void turnRight(){
+        player_path = player_path + "R";
+        switch (direction) {
+            case NORTH:
+                direction = Direction.EAST;
+                break;
+            case WEST:
+                direction = Direction.NORTH;
+                break;
+            case EAST:
+                direction = Direction.SOUTH;
+                break;
+            case SOUTH:
+                direction = Direction.WEST;
+                break;
+        }
     }
 }
