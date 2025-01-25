@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Maze {
     private ArrayList<ArrayList<Space>> maze = new ArrayList<ArrayList<Space>>();
-    private int row_to_create = 0;
+    private int row_to_create = -1;
     private Position start;
     private Position end;
     public Maze() {
@@ -48,5 +48,18 @@ public class Maze {
     }
     public Position getEnd(){
         return new Position(end.getPosX(), end.getPosY());
+    }
+    //for debugging purposes
+    public void printMaze(){
+        for (int i = 0; i < maze.size(); i++) {
+            try {
+                for (int j = 0; j < maze.get(i).size(); j++) {
+                    System.out.print("-");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            System.out.println();
+        }
     }
 }

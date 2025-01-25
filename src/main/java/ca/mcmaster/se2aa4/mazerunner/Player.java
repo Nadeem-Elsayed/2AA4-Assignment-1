@@ -1,7 +1,7 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
 public class Player{
-    private Direction direction = Direction.WEST;
+    private Direction direction = Direction.EAST;
     private Position position;
     private String player_path = "";
     public Player(Position position){
@@ -25,10 +25,10 @@ public class Player{
     public void moveForward(){
         player_path = player_path + "F";
         switch (direction) {
-            case WEST:
+            case EAST:
                 position.setPosX(position.getPosX()+1);
                 break;
-            case EAST:
+            case WEST:
                 position.setPosX(position.getPosX()-1);
                 break;
             case SOUTH:
@@ -60,7 +60,7 @@ public class Player{
         player_path = player_path + "R";
         switch (direction) {
             case NORTH:
-                direction = Direction.WEST;
+                direction = Direction.EAST;
                 break;
             case WEST:
                 direction = Direction.NORTH;
@@ -69,7 +69,7 @@ public class Player{
                 direction = Direction.SOUTH;
                 break;
             case SOUTH:
-                direction = Direction.EAST;
+                direction = Direction.WEST;
                 break;
         }
     }

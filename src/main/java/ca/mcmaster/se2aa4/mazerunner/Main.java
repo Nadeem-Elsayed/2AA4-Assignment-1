@@ -36,6 +36,7 @@ public class Main {
             BufferedReader reader = new BufferedReader(new FileReader(filepath));
             String line;
             while ((line = reader.readLine()) != null) {
+                maze.addRow();
                 for (int idx = 0; idx < line.length(); idx++) {
                     if (line.charAt(idx) == '#') {
                         logger.trace("WALL ");
@@ -46,7 +47,6 @@ public class Main {
                     }
                 }
                 logger.trace(System.lineSeparator());
-                maze.addRow();
             }
         } catch(Exception e) {
             logger.debug("/!\\ No file found /!\\");
