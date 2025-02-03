@@ -22,6 +22,7 @@ public class Player{
     public void setDirection(Direction direction){
         this.direction = direction;
     }
+    //change position based on direction as well as current position
     public void moveForward(){
         player_path = player_path + "F";
         switch (direction) {
@@ -39,6 +40,7 @@ public class Player{
                 break;
         }
     }
+    //change position based on direction as well as current position
     public void turnLeft(){
         player_path = player_path + "L";
         switch (direction) {
@@ -56,6 +58,7 @@ public class Player{
                 break;
         }
     }
+    //change position based on direction as well as current position
     public void turnRight(){
         player_path = player_path + "R";
         switch (direction) {

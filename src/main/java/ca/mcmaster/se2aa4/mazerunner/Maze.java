@@ -10,6 +10,7 @@ public class Maze {
     public Maze() {
         maze.add(new ArrayList<Space>());
     }
+    //add a wall or path to the maze row
     public void addElement(char element){
         switch (element) {
             case '#':
@@ -22,11 +23,18 @@ public class Maze {
                 break;
         }
     }
+    //add a new row to the maze
     public void addRow(){
+        //first check if current row is completely populated till the end
+        if (maze.size()>2) {
+            while (maze.get(row_to_create).size()!=maze.get(row_to_create-1).size()) {
+                addElement(' ');
+            }
+        }
         maze.add(new ArrayList<Space>());
         row_to_create++;
     }
-    //use when finished describing maze
+    //use when finished describing maze to find start and end
     public void detectEndPoints(){
         // printMaze();
         int width = maze.get(0).size();
@@ -40,6 +48,7 @@ public class Maze {
             }
         }
     }
+    //get the element in a certain position, useful for checking if a certain spot is a wall or not
     public Space getElement(Position position){
         return maze.get(position.getPosY()).get(position.getPosX());
     }
