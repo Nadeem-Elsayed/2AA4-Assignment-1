@@ -7,7 +7,7 @@ public class Maze {
     private int row_to_create = -1;
     private Position start;
     private Position end;
-    public Maze() {
+    protected Maze() {
         maze.add(new ArrayList<Space>());
     }
     //add a wall or path to the maze row

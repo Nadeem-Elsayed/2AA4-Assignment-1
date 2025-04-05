@@ -48,26 +48,17 @@ public class MazeRunner {
         logger.trace("Creating Maze");
 
         //now that we have the file, we create a maze object using the data given
-        maze = new Maze();
+        MazeBuilder builder = new MazeBuilder();
         try {
             logger.info("**** Reading the maze from file " + filepath);
             BufferedReader reader = new BufferedReader(new FileReader(filepath));
             String line;
             try {
                 while ((line = reader.readLine()) != null) {
-                    maze.addRow();
-                    for (int idx = 0; idx < line.length(); idx++) {
-                        //if there is a hashtag we add a wall, otherwise we add a path
-                        if (line.charAt(idx) == '#') {
-                            logger.trace("WALL ");
-                            maze.addElement('#');
-                        } else if (line.charAt(idx) == ' ') {
-                            logger.trace("PASS ");
-                            maze.addElement(' ');
-                        }
-                    }
-                    logger.trace(System.lineSeparator());
+                    builder.addRow();
+                    builder.fillRow(line);
                 }
+                maze = builder.build();
             } catch (IOException e) {
                 e.printStackTrace();
             }
