@@ -1,14 +1,14 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-public class MazeChecker {
-    private Maze maze;
-    private String inputpath;
+public class CheckCommand extends Command{
     private Player tester;
-    public MazeChecker(Maze maze, String inputpath){
-        this.inputpath = convertToCanonized(inputpath);
-        this.maze = maze;
+
+    public CheckCommand(Maze maze, String input_path){
+        super(maze, input_path);
+        super.input_path = convertToCanonized(input_path);
         maze.detectEndPoints();
     }
+
     /*
      * converts strings to canonized forms
      * this method can also take in a regular canonized string
@@ -57,8 +57,8 @@ public class MazeChecker {
      */
     public boolean isProper(){
         tester = new Player(maze.getStart());
-        for (int i = 0; i < inputpath.length(); i++) {
-            switch (inputpath.charAt(i)) {
+        for (int i = 0; i < input_path.length(); i++) {
+            switch (input_path.charAt(i)) {
                 case 'F', 'f':
                     tester.moveForward();
                     break;
@@ -81,5 +81,10 @@ public class MazeChecker {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public boolean execute() {
+        return isProper();
     }
 }

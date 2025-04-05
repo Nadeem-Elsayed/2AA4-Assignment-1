@@ -6,8 +6,8 @@ import org.junit.jupiter.api.BeforeEach;
 
 public class Tests {
     private Maze maze;
-    private MazeSolver solver;
-    private MazeChecker checker;
+    private SolveCommand solver;
+    private CheckCommand checker;
     private String canonical;
     private String factorized;
     private Position start;
@@ -53,7 +53,7 @@ public class Tests {
         maze.addElement('#');
         maze.addElement('#');
         maze.addElement('#');
-        solver = new MazeSolver(maze);
+        solver = new SolveCommand(maze, null);
         canonical = solver.solveCanonical();
         factorized = solver.convertToFactorized(canonical);
         //player
@@ -90,12 +90,12 @@ public class Tests {
     }
     @Test
     public void testCheckerTrue(){
-        checker = new MazeChecker(maze, canonical);
+        checker = new CheckCommand(maze, canonical);
         assertTrue(checker.isProper());
     }
     @Test
     public void testCheckerFalse(){
-        checker = new MazeChecker(maze, "FF");
+        checker = new CheckCommand(maze, "FF");
         assertFalse(checker.isProper());
     }
     @Test

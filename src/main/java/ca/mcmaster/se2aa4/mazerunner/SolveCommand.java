@@ -1,12 +1,12 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-public class MazeSolver {
-    private Maze maze;
+public class SolveCommand extends Command{
     private Player player;
     private Position start;
     private Position end;
-    public MazeSolver(Maze maze){
-        this.maze = maze;
+    private String canonized;
+    public SolveCommand(Maze maze, String input_path){
+        super(maze, input_path);
         maze.detectEndPoints();
         start = maze.getStart();
         end = maze.getEnd();
@@ -125,5 +125,13 @@ public class MazeSolver {
         } else {
             return false;
         }
+    }
+    @Override
+    public boolean execute() {
+        canonized = solveCanonical();
+        return true;
+    }
+    public String getCanonized(){
+        return canonized;
     }
 }

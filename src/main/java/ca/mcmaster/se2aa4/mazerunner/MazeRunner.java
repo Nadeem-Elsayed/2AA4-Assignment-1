@@ -13,11 +13,12 @@ import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-public class Main {
+public class MazeRunner {
 
     private static final Logger logger = LogManager.getLogger();
     private static String filepath;
     private static String inputpath;
+    private static Maze maze;
 
     public static void main(String[] args) {
         logger.info("** Starting Maze Runner");
@@ -47,7 +48,7 @@ public class Main {
         logger.trace("Creating Maze");
 
         //now that we have the file, we create a maze object using the data given
-        Maze maze = new Maze();
+        maze = new Maze();
         try {
             logger.info("**** Reading the maze from file " + filepath);
             BufferedReader reader = new BufferedReader(new FileReader(filepath));
@@ -79,8 +80,7 @@ public class Main {
         //if there is a path CLI given, check validity
         if (inputpath != null) {
             logger.info("**** Checking path validity");
-            MazeChecker maze_checker = new MazeChecker(maze, inputpath);
-            if (maze_checker.isProper() == true) {
+            if (executeCommand(new CheckCommand(maze, inputpath))) {
                 logger.info("SUCCESS, GIVEN PATH IS CORRECT");
                 System.out.println("SUCCESS, GIVEN PATH IS CORRECT");
             } else {
@@ -89,9 +89,10 @@ public class Main {
             }
         } else {//if we just have the maze, then find proper paths
             logger.trace("**** Computing path");
-            MazeSolver maze_solver = new MazeSolver(maze);
-            String canonical = maze_solver.solveCanonical();
-            String factorized = maze_solver.convertToFactorized(canonical);
+            SolveCommand solve_command = new SolveCommand(maze, inputpath);
+            executeCommand(solve_command);
+            String canonical = solve_command.getCanonized();
+            String factorized = solve_command.convertToFactorized(canonical);
             logger.info("PATH COMPUTED");
             logger.info("CANONICAL: " + canonical);
             logger.info("FACTORIZED: " + factorized);
@@ -100,5 +101,14 @@ public class Main {
             System.out.println("FACTORIZED: " + factorized);
         }
         logger.info("** End of MazeRunner");
+    }
+    public String getInputPath(){
+        return inputpath;
+    }
+    public Maze getMaze(){
+        return maze;
+    }
+    public static boolean executeCommand(Command command){
+        return command.execute();
     }
 }
